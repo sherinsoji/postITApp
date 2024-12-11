@@ -246,6 +246,7 @@ app.put(
   }
 );
 
-app.listen(3001, () => {
-  console.log("You are connected");
+app.listen(process.env.PORT || 3000, () => {
+  console.log("You are connected to port " + (process.env.PORT || 3000));
 });
+
