@@ -1,7 +1,3 @@
-import { useSelector, useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { useState } from "react";
-
 import {
   Button,
   Col,
@@ -12,6 +8,9 @@ import {
   Input,
 } from "reactstrap";
 
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
 import { savePost } from "../Features/PostSlice";
 
 const SharePosts = () => {
@@ -24,7 +23,6 @@ const SharePosts = () => {
 
   const handlePost = async () => {
     // Validate that postMsg is not empty
-
     if (!postMsg.trim()) {
       alert("Post message is required."); // Display an alert or set an error state
       return; // Exit the function early if validation fails
@@ -38,11 +36,15 @@ const SharePosts = () => {
     dispatch(savePost(postData)); // Dispatch the savePost thunk from the Posts Slice.
     setpostMsg(""); //clear the text area after posting
   };
-
+  useEffect(() => {
+    if (!email) {
+      navigate("/");
+    }
+  }, [email]);
   return (
     <Container>
       <Row>
-        <Col>
+        <Col md={8} className="sharePosts">
           <Input
             id="share"
             name="share"
@@ -51,8 +53,11 @@ const SharePosts = () => {
             value={postMsg}
             onChange={(e) => setpostMsg(e.target.value)}
           />
-          <Button onClick={() => handlePost()}> PostIT</Button>
+          <Button onClick={() => handlePost()} className="button postButton">
+            PostIT
+          </Button>
         </Col>
+        <hr></hr>
       </Row>
     </Container>
   );

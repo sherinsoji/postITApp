@@ -18,6 +18,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { addUser, deleteUser, updateUser } from "../Features/UserSlice";
 import { registerUser } from "../Features/UserSlice";
 import { useNavigate } from "react-router-dom";
+import logo from "../Images/logo-t.png";
+import Footer from "./Footer";
 
 const Register = () => {
   //Retrieve the current value of the state and assign it to a variable.
@@ -74,91 +76,86 @@ const Register = () => {
 
   return (
     <Container fluid>
-      <Row className="formrow">
-        <Col className="columndiv1" lg="6">
+      <Row>
+        <Col md={5} className="center">
+          <img src={logo} className="center" />
+        </Col>
+      </Row>
+      <Row>
+        <Col md={5} className="center">
           {/* Execute first the submitForm function and if validation is good execute the handleSubmit function */}
-          <form className="div-form" onSubmit={handleSubmit(onSubmit)}>
-            <div className="appTitle"></div>
-            <section className="form">
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <section>
+              <div>
+                <FormGroup>
+                  <Label for="name">Name</Label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="name"
+                    placeholder="Enter your name..."
+                    {...register("name", {
+                      onChange: (e) => setname(e.target.value),
+                    })}
+                  />
+                  <p className="error">{errors.name?.message}</p>
+                </FormGroup>
+              </div>
+
               <div className="form-group">
-                <input
-                  type="text"
-                  className="form-control"
-                  id="name"
-                  placeholder="Enter your name..."
-                  {...register("name", {
-                    onChange: (e) => setname(e.target.value),
-                  })}
-                />
-                <p className="error">{errors.name?.message}</p>
+                <FormGroup>
+                  <Label for="email">Email</Label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="email"
+                    placeholder="Enter your email..."
+                    {...register("email", {
+                      onChange: (e) => setemail(e.target.value),
+                    })}
+                  />
+                  <p className="error">{errors.email?.message}</p>
+                </FormGroup>
               </div>
               <div className="form-group">
-                <input
-                  type="text"
-                  className="form-control"
-                  id="email"
-                  placeholder="Enter your email..."
-                  {...register("email", {
-                    onChange: (e) => setemail(e.target.value),
-                  })}
-                />
-                <p className="error">{errors.email?.message}</p>
+                <FormGroup>
+                  <Label for="password">Password</Label>
+                  <input
+                    type="password"
+                    className="form-control"
+                    id="password"
+                    placeholder="Enter your password..."
+                    {...register("password", {
+                      onChange: (e) => setpassword(e.target.value),
+                    })}
+                  />
+                  <p className="error">{errors.password?.message}</p>
+                </FormGroup>
               </div>
               <div className="form-group">
-                <input
-                  type="password"
-                  className="form-control"
-                  id="password"
-                  placeholder="Enter your password..."
-                  {...register("password", {
-                    onChange: (e) => setpassword(e.target.value),
-                  })}
-                />
-                <p className="error">{errors.password?.message}</p>
+                <FormGroup>
+                  <Label for="Confirm">Confirm Password</Label>
+                  <input
+                    type="password"
+                    className="form-control"
+                    id="confirmPassword"
+                    placeholder="Confirm your password..."
+                    {...register("confirmPassword", {
+                      onChange: (e) => setconfirmPassword(e.target.value),
+                    })}
+                  />
+                  <p className="error">{errors.confirmPassword?.message}</p>
+                </FormGroup>
               </div>
-              <div className="form-group">
-                <input
-                  type="password"
-                  className="form-control"
-                  id="confirmPassword"
-                  placeholder="Confirm your password..."
-                  {...register("confirmPassword", {
-                    onChange: (e) => setconfirmPassword(e.target.value),
-                  })}
-                />
-                <p className="error">{errors.confirmPassword?.message}</p>
-              </div>
-              <Button color="primary" className="button">
-                Register
-              </Button>
+              <FormGroup>
+                <Button className="button">Register</Button>
+              </FormGroup>
             </section>
           </form>
         </Col>
-        <Col className="columndiv2" lg="6"></Col>
       </Row>
       <Row>
-        <Col md={6}>
-          {/* List of Users
-          <table>
-            <tbody>
-              {userList.map((user) => (
-                <tr key={user.email}>
-                  <td>{user.name}</td>
-                  <td>{user.email}</td>
-                  <td>{user.password}</td>
-                  <td>
-                    <Button onClick={() => handleDelete(user.email)}>
-                      Delete User
-                    </Button>
-                    <Button onClick={() => handleUpdate(user.email)}>
-                      Update User
-                    </Button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table> */}
-        </Col>
+        <Footer />
       </Row>
     </Container>
   );

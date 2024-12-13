@@ -10,20 +10,26 @@ import { dirname } from "path";
 import fs from "fs";
 import path from "path";
 
+import cookieParser from "cookie-parser";
 import * as ENV from "./config.js";
 
 const app = express();
 app.use(express.json());
-app.use(cors());
 
-//Database connection
-const connectString =
-  "mongodb+srv://${ENV.DB_USER}:${ENV.DB_PASSWORD}@${ENV.DB_CLUSTER}/${ENV.DB_NAME}?retryWrites=true&w=majority&appName=PostITCluster";
+//Middleware
+const corsOptions = {
+  origin: ENV.CLIENT_URL, //client URL local
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  credentials: true, // Enable credentials (cookies, authorization headers, etc.)
+};
+app.use(cors(corsOptions));
 
-mongoose.connect(connectString, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+app.use(express.json());
+app.use(cookieParser());
+
+const connectString = `mongodb+srv://${ENV.DB_USER}:${ENV.DB_PASSWORD}@${ENV.DB_CLUSTER}/${ENV.DB_NAME}?retryWrites=true&w=majority&appName=Cluster0`;
+
+mongoose.connect(connectString);
 
 // Serve static files from the 'uploads' directory
 
@@ -73,23 +79,23 @@ app.post("/registerUser", async (req, res) => {
 //POST API-login
 app.post("/login", async (req, res) => {
   try {
-    const { email, password } = req.body;
-    const user = await UserModel.findOne({ email });
+    const { email, password } = req.body; //using destructuring
+    //search the user
+    const user = await UserModel.findOne({ email: email });
 
     if (!user) {
-      return res.status(404).json({ error: "User not found" });
+      return res.status(500).json({ error: "User not found." });
     }
-
+    console.log(user);
     const passwordMatch = await bcrypt.compare(password, user.password);
+
     if (!passwordMatch) {
       return res.status(401).json({ error: "Authentication failed" });
     }
 
-    // Exclude the password field
-    const { password: _, ...safeUser } = user._doc;
-    res.status(200).json({ user: safeUser, message: "Login successful" });
+    //if everything is ok, send the user and message
+    res.status(200).json({ user, message: "Success." });
   } catch (err) {
-    console.error(err);
     res.status(500).json({ error: err.message });
   }
 });
@@ -247,7 +253,9 @@ app.put(
     }
   }
 );
+
 const port = ENV.PORT || 3001;
+
 app.listen(port, () => {
   console.log(`You are connected at port: ${port}`);
 });

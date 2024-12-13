@@ -50,6 +50,7 @@ export const login = createAsyncThunk("users/login", async (userData) => {
     const errorMessage = "Invalid credentials";
     alert(errorMessage);
     throw new Error(errorMessage);
+    //return rejectWithValue(errorMessage);
   }
 });
 
@@ -119,6 +120,7 @@ export const userSlice = createSlice({
         }
       });
     },
+    reset: () => initialState,
   },
 
   extraReducers: (builder) => {
@@ -172,6 +174,6 @@ export const userSlice = createSlice({
   },
 });
 
-export const { addUser, deleteUser, updateUser } = userSlice.actions; //export the function
+export const { addUser, deleteUser, updateUser, reset } = userSlice.actions; //export the function
 
 export default userSlice.reducer;

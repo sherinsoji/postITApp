@@ -17,6 +17,7 @@ import { login } from "../Features/UserSlice";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import Footer from "./Footer";
 
 const Login = () => {
   const [email, setemail] = useState();
@@ -40,24 +41,24 @@ const Login = () => {
 
   useEffect(() => {
     if (isError) {
-      navigate("/login");
+      navigate("/");
     }
     if (isSuccess) {
-      navigate("/");
+      navigate("/home");
     }
   }, [user, isError, isSuccess]);
 
   return (
     <div>
-      <Container>
+      <Container fluid>
+        <Row>
+          <Col md={4} className="center">
+            <img src={logo} />
+          </Col>
+        </Row>
         <Form>
           <Row>
-            <Col md={3}>
-              <img src={logo} />
-            </Col>
-          </Row>
-          <Row>
-            <Col md={3}>
+            <Col md={4} className="center">
               <FormGroup>
                 <Label for="email">Email</Label>
                 <Input
@@ -71,7 +72,7 @@ const Login = () => {
             </Col>
           </Row>
           <Row>
-            <Col md={3}>
+            <Col md={4} className="center">
               <FormGroup>
                 <Label for="password">Password</Label>
                 <Input
@@ -85,14 +86,19 @@ const Login = () => {
             </Col>
           </Row>
           <Row>
-            <Col md={3}>
-              <Button onClick={() => handleLogin()}> Login </Button>
+            <Col md={4} className="center">
+              <Button onClick={() => handleLogin()} className="button">
+                Login
+              </Button>
+              <p className="smalltext">
+                No Account? <Link to="/register">Sign Up now.</Link>
+              </p>
             </Col>
           </Row>
         </Form>
-        <p className="smalltext">
-          No Account? <Link to="/register">Sign Up now.</Link>
-        </p>
+        <Row>
+          <Footer />
+        </Row>
       </Container>
     </div>
   );

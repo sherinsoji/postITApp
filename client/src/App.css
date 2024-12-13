@@ -15,9 +15,9 @@ a:hover {
   color: hotpink;
 }
 
-.login {
-  align-items: center;
-  justify-content: center;
+.center {
+  display: block;
+  margin: auto;
 }
 .div-form {
   border-style: solid;
@@ -40,9 +40,8 @@ a:hover {
   margin: 2px;
 }
 .smalltext {
-  font-size: 14px;
-  font-weight: bold;
-  color: #522a27;
+  font-size: 10pt;
+  color: #6d6c6c;
 }
 
 .columndiv1 {
@@ -84,21 +83,11 @@ a:hover {
   display: flex;
   vertical-align: top;
 }
-.checkbox {
-  width: 25px;
-  height: 25px;
-}
-.button {
-  text-align: center;
-  padding: 10px;
-  width: 100%;
-  background-color: #c59849;
-  border-style: none;
-}
+
 body {
   font-family: "Roboto", sans-serif;
-  margin: 10;
-  margin-left: 10px;
+
+  margin-left: 0;
 }
 .navigation {
   background-color: #9cb380;
@@ -107,14 +96,11 @@ body {
   color: #522a27;
 }
 .footer {
-  display: flex;
-  background-color: #9cb380;
-  height: 100px;
-  color: #522a27;
-  justify-content: center;
-  align-items: center;
-  font-weight: bolder;
-  flex-shrink: 0;
+  text-align: center;
+  padding: 1em;
+  background-color: #f1f1f1;
+  font-size: 14px;
+  color: #333;
 }
 .socialmedia {
   width: 100px;
@@ -139,30 +125,26 @@ body {
 
 .main {
   flex-grow: 1;
-  min-height: 300px;
+  min-height: 200px;
 }
 .sharePosts {
   padding-top: 10px;
-  height: 200px;
-  border-style: solid;
-  border-width: thin;
-  margin-top: 10px;
-  border-color: #a6d49f;
-  text-align: center;
-}
-.inputPost {
   margin-right: 10px;
-  width: 80%;
   border-color: #522a27;
+  text-align: center;
+  display: flex; /* Use flexbox for layout */
+  align-items: center; /* Vertically center the items */
+  padding-bottom: 50px;
 }
-.input-button-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+
 .postButton {
-  background-color: #522a27;
+  width: 150px;
+  display: flex; /* Use flexbox to control button content */
+  justify-content: center; /* Center content inside button */
+  align-items: center; /* Vertically center content */
+  margin-left: 10px; /* Space between buttons if there are multiple */
 }
+
 .dept {
   display: flex;
   flex-direction: row;
@@ -177,10 +159,6 @@ body {
   margin: 10px;
 }
 
-.postsContainer {
-  display: flex;
-  flex-direction: column;
-}
 .post {
   display: flex;
   flex-direction: column;
@@ -188,23 +166,7 @@ body {
   height: auto;
   width: 100%;
 }
-.postMsg {
-  padding: 20px;
 
-  border: 1px solid rgb(244, 241, 241);
-}
-.postedBy {
-  padding: 10px;
-  background-color: rgb(236, 238, 236);
-  border-radius: 10px;
-}
-.postByName {
-  font-weight: bolder;
-  font: optional;
-}
-.postDate {
-  margin-left: 5px;
-}
 .navs {
   padding: 10px;
 }
@@ -222,17 +184,28 @@ body {
 .header {
   display: flex;
   align-items: center; /* Vertically align items */
-  padding: 10px;
-  background-color: #f8f9fa;
+  padding: 20px;
+  background-color: #a6d49f;
+  margin-bottom: 20px;
+  font-size: 14pt;
+  justify-content: space-between; /* Distributes space between elements */
+}
+.navbar-brand {
+  display: flex;
+  align-items: center; /* Vertically center the brand */
+}
+.nav {
+  display: flex; /* Ensures nav items are in a row */
+  align-items: center; /* Vertically center nav items */
 }
 
-.nav {
-  display: flex;
-  align-items: center; /* Vertically align items */
+.nav-item {
+  margin-left: 1rem; /* Adds space between nav items */
 }
 
 .logo {
-  height: 50px; /* Adjust the logo size as needed */
+  height: 60px; /* Adjust the logo size as needed */
+  width: 140px;
 }
 
 .nav a {
@@ -243,4 +216,19 @@ body {
 
 .nav a:hover {
   color: #007bff; /* Change color on hover (optional) */
+}
+label {
+  color: #522a27;
+  font-weight: bolder;
+}
+.button {
+  color: #2e2836;
+}
+.postTime {
+  font-size: 10pt;
+  color: #504d4d;
+}
+.location{
+  font-size: 8pt;
+  text-align: center;
 }
